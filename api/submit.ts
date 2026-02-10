@@ -30,8 +30,10 @@ export default async function handler(req: any, res: any) {
 
         // Extract the actual filename created by Vercel (which includes the random suffix)
         // Create URL object from blob URL
-        const url = new URL(blob.url);
-        const shareId = url.pathname.split('/').pop()?.replace('.json', '') || '';
+        const blobUrl = new URL(blob.url);
+        const storeId = blobUrl.hostname.split('.')[0];
+        const filename = blobUrl.pathname.split('/').pop()?.replace('.json', '') || '';
+        const shareId = `${storeId}~${filename}`;
         // Use request host for share URL, fallback to known domain
         const host = req.headers.host || 'deambitiebar.nl';
         const protocol = req.headers['x-forwarded-proto'] || 'https';

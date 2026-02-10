@@ -41,8 +41,20 @@ const App: React.FC = () => {
         }
 
         try {
-          // Fetch from the storage URL directly
-          const response = await fetch(`https://bhoyfhz0i2o2u3kf.public.blob.vercel-storage.com/results/${id}.json`);
+          // If ID contains ~, it's a new style 'storeId~fileId'
+          // Otherwise, assume it's the old style and the user is on the old store (or local)
+          let fetchUrl;
+          if (id.includes('~')) {
+            const [storeId, fileId] = id.split('~');
+            fetchUrl = `https://${storeId}.public.blob.vercel-storage.com/results/${fileId}.json`;
+          } else {
+            // Fallback for old IDs (local or existing)
+            // Default to the known store if no prefix
+            const defaultStoreId = 'ucwgphbtstrr2khv';
+            fetchUrl = `https://${defaultStoreId}.public.blob.vercel-storage.com/results/${id}.json`;
+          }
+
+          const response = await fetch(fetchUrl);
           if (response.ok) {
             const data = await response.json();
             setAnswers(data.answers);
