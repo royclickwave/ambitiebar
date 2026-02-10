@@ -124,7 +124,8 @@ const App: React.FC = () => {
         // Update URL without reloading
         const newUrl = `${window.location.origin}${window.location.pathname}?id=${id}`;
         window.history.pushState({ id }, '', newUrl);
-        setIsFirstView(true);
+        // Show full report immediately
+        setIsFirstView(false);
         setCurrentView(AppView.REPORT);
       } else {
         console.error('Server responded with error');
