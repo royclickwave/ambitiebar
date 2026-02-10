@@ -1,0 +1,118 @@
+{
+  "name": "workon",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "loontransparantie",
+        "options": {}
+      },
+      "id": "ee93b48c-788c-48f3-80f5-f3d19873f332",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        288
+      ],
+      "webhookId": "1fac346d-646c-4079-a6a2-238e960f8ba2"
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "number": [
+            {
+              "name": "score",
+              "value": "={{Object.values($json.body.answers).reduce((acc, curr) => acc + curr.points, 0)}}"
+            }
+          ],
+          "string": [
+            {
+              "name": "name",
+              "value": "={{$json.body.userDetails.name}}"
+            },
+            {
+              "name": "company",
+              "value": "={{$json.body.userDetails.company}}"
+            },
+            {
+              "name": "email",
+              "value": "={{$json.body.userDetails.email}}"
+            },
+            {
+              "name": "shareUrl",
+              "value": "={{$json.body.shareUrl}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f3641083-957c-44c3-b316-b2c037d4c5fa",
+      "name": "Prepare Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        96,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        368,
+        304
+      ],
+      "id": "76b49ad3-176c-433a-9c59-7281580f5118",
+      "name": "Send a message",
+      "webhookId": "7745246d-5804-4ed6-b561-4507385f639b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "oXzre6fhFJ3bW7MI",
+          "name": "Gmail Marketing@clickwave.nl"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Prepare Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Data": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "2ea67bab-8ec9-449c-a203-ca2f3c9b921f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a8153022011ebb99e69152930a54f801e3f1b4c4c25549d95313da2e85a2a6dc"
+  },
+  "id": "wJfnuUzuWsRYAISL4lqyz",
+  "tags": []
+}

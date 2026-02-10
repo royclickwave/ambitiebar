@@ -1,0 +1,113 @@
+{
+    "name": "Loontransparantie Scan Lead",
+    "nodes": [
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "loontransparantie",
+                "options": {}
+            },
+            "id": "ee93b48c-788c-48f3-80f5-f3d19873f332",
+            "name": "Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 1,
+            "position": [
+                -112,
+                288
+            ],
+            "webhookId": "1fac346d-646c-4079-a6a2-238e960f8ba2"
+        },
+        {
+            "parameters": {
+                "keepOnlySet": true,
+                "values": {
+                    "number": [
+                        {
+                            "name": "score",
+                            "value": "={{Object.values($json.body.answers).reduce((acc, curr) => acc + curr.points, 0)}}"
+                        }
+                    ],
+                    "string": [
+                        {
+                            "name": "name",
+                            "value": "={{$json.body.userDetails.name}}"
+                        },
+                        {
+                            "name": "company",
+                            "value": "={{$json.body.userDetails.company}}"
+                        },
+                        {
+                            "name": "email",
+                            "value": "={{$json.body.userDetails.email}}"
+                        },
+                        {
+                            "name": "shareUrl",
+                            "value": "={{$json.body.shareUrl}}"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "f3641083-957c-44c3-b316-b2c037d4c5fa",
+            "name": "Prepare Data",
+            "type": "n8n-nodes-base.set",
+            "typeVersion": 1,
+            "position": [
+                96,
+                288
+            ]
+        },
+        {
+            "parameters": {
+                "resource": "message",
+                "subject": "=📢 Nieuwe Lead: Loonscan resultaat van {{ $json.name }} ({{ $json.company }})",
+                "emailType": "html",
+                "to": "tess@work-on.nl",
+                "html": "=<div style=\"font-family: Arial, sans-serif; background-color: #f5f1ff; padding: 40px; color: #23004c;\">\n  <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);\">\n    <div style=\"background-color: #23004c; padding: 40px; text-align: center;\">\n      <img src=\"https://www.work-on.nl/app/uploads/2025/01/work-on-300x99.png\" alt=\"Work-on\" style=\"width: 150px; margin-bottom: 20px;\">\n      <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Nieuwe Lead!</h1>\n    </div>\n    <div style=\"padding: 40px;\">\n      <p style=\"font-size: 18px;\">Hi Tess,</p>\n      <p>Er is een nieuwe scan afgerond op het Loontransparantie dashboard. Hier zijn de details:</p>\n      \n      <div style=\"background-color: #f5f1ff; padding: 25px; border-radius: 15px; margin: 30px 0;\">\n        <h2 style=\"margin-top: 0; font-size: 20px; color: #23004c;\">Klantgegevens</h2>\n        <p><strong>Naam:</strong> {{ $json.name }}</p>\n        <p><strong>Bedrijf:</strong> {{ $json.company }}</p>\n        <p><strong>Email:</strong> {{ $json.email }}</p>\n        <hr style=\"border: 0; border-top: 1px solid #ddd; margin: 20px 0;\">\n        <h2 style=\"font-size: 20px; color: #23004c;\">Resultaat</h2>\n        <p style=\"font-size: 24px; font-weight: bold;\">Score: <span style=\"color: {{ $json.score < 40 ? '#ef4444' : ($json.score <= 60 ? '#ffdf35' : '#16a34a') }};\">{{ $json.score }} / 100</span></p>\n      </div>\n\n      <div style=\"text-align: center; margin-top: 40px;\">\n        <a href=\"{{ $json.shareUrl }}\" style=\"background-color: #ffdf35; color: #23004c; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 16px; display: inline-block;\">Bekijk Analyse Report →</a>\n      </div>\n\n      <p style=\"margin-top: 40px; font-size: 14px; color: #666;\">\n        Deze lead is automatisch gegenereerd via de Work-on Loontransparantie Scan.\n      </p>\n    </div>\n  </div>\n</div>",
+                "options": {}
+            },
+            "id": "76b49ad3-176c-433a-9c59-7281580f5118",
+            "name": "Send a message",
+            "type": "n8n-nodes-base.gmail",
+            "typeVersion": 2.2,
+            "position": [
+                368,
+                304
+            ],
+            "credentials": {
+                "gmailOAuth2": {
+                    "id": "oXzre6fhFJ3bW7MI",
+                    "name": "Gmail Marketing@clickwave.nl"
+                }
+            }
+        }
+    ],
+    "connections": {
+        "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "Prepare Data",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Prepare Data": {
+            "main": [
+                [
+                    {
+                        "node": "Send a message",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "active": false,
+    "settings": {
+        "executionOrder": "v1"
+    }
+}
