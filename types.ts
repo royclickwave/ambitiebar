@@ -20,6 +20,7 @@ export interface UserDetails {
   name: string;
   email: string;
   company: string;
+  phone?: string;
 }
 
 export enum AppView {

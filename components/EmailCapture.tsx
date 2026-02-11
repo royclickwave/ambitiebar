@@ -72,17 +72,16 @@ export const EmailCapture: React.FC<EmailCaptureProps> = ({ onSubmit }) => {
                 />
               </div>
 
-              <div className="flex items-start gap-3 pt-2">
+              <div>
+                <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-1 font-title italic">Telefoonnummer (optioneel)</label>
                 <input
-                  type="checkbox"
-                  id="optIn"
-                  checked={optIn}
-                  onChange={e => setOptIn(e.target.checked)}
-                  className="mt-1 w-4 h-4 text-primary-yellow rounded border-gray-300 focus:ring-primary-yellow"
+                  type="tel"
+                  id="phone"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-yellow focus:border-transparent outline-none transition-all font-sans"
+                  placeholder="06 12345678"
+                  value={details.phone || ''} // Handle undefined
+                  onChange={e => setDetails({ ...details, phone: e.target.value })}
                 />
-                <label htmlFor="optIn" className="text-sm text-gray-600 font-sans">
-                  Ja, stuur mij ook waardevolle updates over de arbeidsmarkt en employer branding.
-                </label>
               </div>
 
               <Button type="submit" fullWidth className="mt-4 bg-primary-yellow text-black hover:bg-black hover:text-white transition-all">
@@ -91,8 +90,8 @@ export const EmailCapture: React.FC<EmailCaptureProps> = ({ onSubmit }) => {
             </form>
 
             <div className="mt-8 flex items-center justify-center gap-3 opacity-80">
-              <p className="text-xs text-gray-400 text-center italic">
-                "We gaan zorgvuldig om met je gegevens. Geen spam, alleen de beste ambities." <br /> — Team De Ambitie Bar
+              <p className="text-xs text-gray-400 text-center italic max-w-sm font-title">
+                "De beste kandidaten kiezen niet voor het hoogste salaris. Ze kiezen voor het bedrijf dat het beste verhaal vertelt."
               </p>
             </div>
           </div>

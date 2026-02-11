@@ -13,10 +13,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
     return (
         <Layout>
             {/* Hero Section */}
-            <div className="relative bg-black overflow-hidden text-white border-b-4 border-primary-yellow">
+            <div className="relative bg-white overflow-hidden text-black border-b-4 border-primary-yellow">
                 <div className="absolute inset-0 z-0">
-                    <img src={IMAGES.hero} alt="Office" className="w-full h-full object-cover opacity-30" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+                    <img src={IMAGES.hero} alt="Office" className="w-full h-full object-cover opacity-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent"></div>
                 </div>
 
                 <div className="relative z-10 max-w-6xl mx-auto px-4 py-20 md:py-32 flex flex-col md:flex-row items-center gap-12">
@@ -26,7 +26,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <span className="inline-block py-1 px-3 rounded-full bg-primary-yellow/20 text-primary-yellow border border-primary-yellow/30 text-sm font-semibold mb-4">
+                            <span className="inline-block py-1 px-3 rounded-full bg-primary-yellow/20 text-black border border-primary-yellow/50 text-sm font-semibold mb-4">
                                 Voor Werkgevers
                             </span>
                             <h1 className="text-4xl md:text-6xl font-bold font-title leading-tight italic">
@@ -39,7 +39,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.2, duration: 0.5 }}
-                            className="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed"
+                            className="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed"
                         >
                             Het vinden van ervaren professionals is lastiger dan ooit. Maar nog belangrijker: hoe zorg je dat ze voor jóu kiezen? Ontdek met onze scan hoe aantrekkelijk jouw organisatie is voor medior en senior talent en waar de kansen liggen.
                         </motion.p>
@@ -50,11 +50,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                             transition={{ delay: 0.4, duration: 0.5 }}
                             className="flex flex-col sm:flex-row gap-4 pt-4"
                         >
-                            <Button onClick={onStart} className="gap-2 bg-primary-yellow text-black hover:bg-white hover:text-black transition-all">
+                            <Button onClick={onStart} className="gap-2 bg-primary-yellow text-black hover:bg-black hover:text-white transition-all">
                                 Start de scan <ArrowRight className="w-5 h-5" />
                             </Button>
                         </motion.div>
-                        <div className="flex items-center gap-4 text-sm text-gray-400">
+                        <div className="flex items-center gap-4 text-sm text-gray-500">
                             <span className="flex items-center gap-1"><FileBarChart className="w-4 h-4" /> 8 vragen</span>
                             <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> 2 minuten</span>
                             <span className="flex items-center gap-1"><CheckCircle2 className="w-4 h-4" /> Direct inzicht</span>
@@ -67,26 +67,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                             alt="De Ambitie Bar"
                             className="rounded-2xl shadow-2xl border-4 border-primary-yellow/20 rotate-1 hover:rotate-0 transition-transform duration-500"
                         />
-                        <div className="absolute -bottom-6 -left-6 bg-white text-black p-4 rounded-xl shadow-lg max-w-xs border-l-4 border-primary-yellow">
+                        <div className="absolute -bottom-6 -left-6 bg-black text-white p-4 rounded-xl shadow-lg max-w-xs border-l-4 border-primary-yellow">
                             <div className="flex items-center gap-3">
                                 <div>
                                     <p className="font-bold text-sm italic">"Senior talent zoekt niet alleen een baan, maar een plek waar ze echt impact kunnen maken en hun ambities kwijt kunnen."</p>
-                                    <p className="text-xs text-gray-500 mt-2">Team De Ambitie Bar</p>
+                                    <p className="text-xs text-gray-300 mt-2">Team De Ambitie Bar</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Social Proof */}
-            <div className="bg-white py-12 border-b border-neutral-gray">
-                <div className="max-w-6xl mx-auto px-4 text-center">
-                    <p className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-8 italic">Wij verbinden ambitieuze organisaties met talent</p>
-                    <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                        {IMAGES.clients.map((logo, idx) => (
-                            <img key={idx} src={logo} alt={`Client ${idx}`} className="h-10 md:h-12 object-contain" />
-                        ))}
                     </div>
                 </div>
             </div>

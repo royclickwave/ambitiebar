@@ -183,10 +183,18 @@ export const Results: React.FC<ResultsProps> = ({ answers, userDetails, isFirstV
                     </div>
                     <div className="flex-1 text-center md:text-left">
                         <h3 className="text-2xl font-bold font-title text-black mb-4 italic uppercase tracking-tighter">Jouw Talent Factor</h3>
-                        <p className="text-gray-600 text-lg leading-relaxed font-sans">
+                        <p className="text-gray-600 text-lg leading-relaxed font-sans mb-4">
                             Deze score laat zien hoe klaar jullie zijn om medior en senior talent aan te trekken dat écht het verschil maakt.
                             {score < 40 ? " Er liggen enorme kansen om jullie aanpak te professionaliseren." : score <= 70 ? " Je hebt een solide basis, maar de 'finishing touch' ontbreekt nog." : " Jullie begrijpen de markt voor toptalent als geen ander."}
                         </p>
+                        {isFirstView && (
+                            <div className="bg-primary-yellow/10 border-l-4 border-primary-yellow p-4 rounded-r-lg inline-block text-left">
+                                <p className="font-bold text-black font-title italic flex items-center gap-2">
+                                    <Mail className="w-5 h-5" />
+                                    We sturen het volledige rapport ook naar je toe!
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -196,7 +204,7 @@ export const Results: React.FC<ResultsProps> = ({ answers, userDetails, isFirstV
                         <div className="bg-primary-yellow p-2 rounded-lg">
                             <ArrowRight className="w-6 h-6 text-black" />
                         </div>
-                        <h2 className="text-3xl font-bold font-title text-black uppercase tracking-tight italic">Top 3 Ambities</h2>
+                        <h2 className="text-3xl font-bold font-title text-black uppercase tracking-tight italic">3 Dingen die je nu al kan doen</h2>
                     </div>
                     <div className="grid gap-6">
                         {content.topActions.map((action, idx) => (
@@ -224,27 +232,10 @@ export const Results: React.FC<ResultsProps> = ({ answers, userDetails, isFirstV
                     </div>
                 </div>
 
-                {isFirstView && (
-                    <div className="mb-16 bg-primary-yellow border-4 border-black p-8 md:p-12 text-center shadow-2xl transform rotate-1 animate-pulse">
-                        <h3 className="text-2xl md:text-3xl font-bold font-title text-black mb-4 italic uppercase">
-                            🎉 Je Talent-Factor is berekend!
-                        </h3>
-                        <p className="text-black font-medium mb-6 text-lg italic">
-                            We hebben je volledige analyse en het actieplan voor je klaarstaan.
-                        </p>
-                        <button
-                            onClick={() => window.location.reload()}
-                            className="bg-black text-white font-bold font-title py-4 px-10 text-xl hover:bg-white hover:text-black transition-all italic border-2 border-black"
-                        >
-                            Ververs de pagina voor de volledige preview
-                        </button>
-                    </div>
-                )}
-
-                <div className={isFirstView ? 'opacity-20 pointer-events-none select-none blur-sm' : ''}>
+                <div>
                     {/* Detail Sections */}
                     <div className="space-y-12">
-                        <h2 className="text-3xl font-bold font-title text-black uppercase tracking-tight border-b-4 border-primary-yellow inline-block pb-2 mb-4 italic">De Analyse</h2>
+                        <h2 className="text-3xl font-bold font-title text-black uppercase tracking-tight border-b-4 border-primary-yellow inline-block pb-2 mb-4 italic">De volledige analyse</h2>
 
                         {[
                             { title: "Employer Branding", data: content.structure },
