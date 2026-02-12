@@ -13,7 +13,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
     return (
         <Layout>
             {/* Hero Section */}
-            <div className="relative min-h-[85vh] flex items-center bg-black overflow-hidden border-b-4 border-primary-yellow">
+            <div className="relative min-h-[75vh] md:min-h-[80vh] flex items-center bg-black overflow-hidden border-b-4 border-primary-yellow">
                 <div className="absolute inset-0 z-0">
                     <img
                         src="https://deambitiebar.nl/wp-content/uploads/2025/05/57-homepage.jpg"
@@ -23,20 +23,20 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                     <div className="absolute inset-0 bg-black/40"></div>
                 </div>
 
-                <div className="relative z-10 max-w-6xl mx-auto px-4 py-20 md:py-32 w-full">
+                <div className="relative z-10 max-w-6xl mx-auto px-4 py-16 md:py-24 w-full">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="max-w-3xl space-y-8 bg-white/10 backdrop-blur-xl p-8 md:p-14 rounded-[2rem] border border-white/20 shadow-2xl text-white"
+                        className="max-w-3xl space-y-6 bg-white/10 backdrop-blur-xl p-8 md:p-12 rounded-[2rem] border border-white/20 shadow-2xl text-white"
                     >
-                        <div className="space-y-6">
+                        <div className="space-y-4">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.2, duration: 0.5 }}
                             >
-                                <h1 className="text-4xl md:text-7xl font-bold font-title leading-tight italic">
+                                <h1 className="text-4xl md:text-6xl font-bold font-title leading-tight italic">
                                     Talent Scan voor <br />
                                     <span className="text-primary-yellow">Ervaren Professionals</span>
                                 </h1>
@@ -46,7 +46,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.4, duration: 0.5 }}
-                                className="text-lg md:text-2xl text-white/90 max-w-2xl leading-relaxed font-sans"
+                                className="text-base md:text-xl text-white/90 max-w-2xl leading-relaxed font-sans"
                             >
                                 Het vinden van ervaren professionals is lastiger dan ooit. Ze hebben al een baan, een prima salaris en worden wekelijks benaderd. Ontdek met onze scan hoe aantrekkelijk jouw organisatie is voor ervaren professionals en waar jullie kansen liggen.
                             </motion.p>
@@ -57,18 +57,33 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                                 transition={{ delay: 0.6, duration: 0.5 }}
                                 className="flex flex-col sm:flex-row gap-4 pt-4"
                             >
-                                <Button onClick={onStart} className="gap-2 bg-primary-yellow text-black hover:bg-white transition-all transform hover:scale-105 active:scale-95 duration-200 px-10 py-8 text-xl">
-                                    Start de scan <ArrowRight className="w-6 h-6" />
+                                <Button onClick={onStart} className="gap-2 bg-primary-yellow text-black hover:bg-white transition-all transform hover:scale-105 active:scale-95 duration-200 px-8 py-6 text-lg">
+                                    Start de scan <ArrowRight className="w-5 h-5" />
                                 </Button>
                             </motion.div>
-                            <div className="flex flex-wrap items-center gap-6 text-sm text-white/70 font-medium">
-                                <span className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10"><FileBarChart className="w-4 h-4 text-primary-yellow" /> 8 vragen</span>
-                                <span className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10"><Clock className="w-4 h-4 text-primary-yellow" /> 2 minuten</span>
-                                <span className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10"><CheckCircle2 className="w-4 h-4 text-primary-yellow" /> Direct inzicht</span>
+                            <div className="flex flex-wrap items-center gap-4 text-xs text-white/70 font-medium pt-2">
+                                <span className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full border border-white/10"><FileBarChart className="w-4 h-4 text-primary-yellow" /> 8 vragen</span>
+                                <span className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full border border-white/10"><Clock className="w-4 h-4 text-primary-yellow" /> 2 minuten</span>
+                                <span className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full border border-white/10"><CheckCircle2 className="w-4 h-4 text-primary-yellow" /> Direct inzicht</span>
                             </div>
                         </div>
                     </motion.div>
                 </div>
+
+                {/* Scroll Indicator */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.6 }}
+                    transition={{ delay: 1, duration: 1 }}
+                    className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-white/50"
+                >
+                    <span className="text-[10px] uppercase tracking-widest font-bold">Scroll</span>
+                    <motion.div
+                        animate={{ y: [0, 8, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                        className="w-1 h-8 bg-gradient-to-b from-primary-yellow to-transparent rounded-full"
+                    />
+                </motion.div>
             </div>
 
             {/* Problem Section */}
