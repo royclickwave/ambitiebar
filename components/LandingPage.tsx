@@ -36,7 +36,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.2, duration: 0.5 }}
                             >
-                                <h1 className="text-4xl md:text-6xl font-bold font-title leading-tight italic">
+                                <h1 className="text-3xl md:text-5xl font-bold font-title leading-tight italic">
                                     Talent Scan voor <br />
                                     <span className="text-primary-yellow">Ervaren Professionals</span>
                                 </h1>
@@ -46,7 +46,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.4, duration: 0.5 }}
-                                className="text-base md:text-xl text-white/90 max-w-2xl leading-relaxed font-sans"
+                                className="text-sm md:text-lg text-white/90 max-w-2xl leading-relaxed font-sans"
                             >
                                 Het vinden van ervaren professionals is lastiger dan ooit. Ze hebben al een baan, een prima salaris en worden wekelijks benaderd. Ontdek met onze scan hoe aantrekkelijk jouw organisatie is voor ervaren professionals en waar jullie kansen liggen.
                             </motion.p>
