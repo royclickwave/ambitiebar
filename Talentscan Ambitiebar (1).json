@@ -1,0 +1,383 @@
+{
+  "name": "Talentscan Ambitiebar",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ambitiebar",
+        "options": {}
+      },
+      "id": "fc55bca0-a16b-4409-9875-3287b3799e37",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        688,
+        512
+      ],
+      "webhookId": "5688747b-b833-4bca-a73b-88f24e43c297"
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "number": [
+            {
+              "name": "score",
+              "value": "={{Object.values($json.body.answers).reduce((acc, curr) => acc + curr.points, 0)}}"
+            }
+          ],
+          "string": [
+            {
+              "name": "name",
+              "value": "={{$json.body.userDetails.name}}"
+            },
+            {
+              "name": "company",
+              "value": "={{$json.body.userDetails.company}}"
+            },
+            {
+              "name": "email",
+              "value": "={{$json.body.userDetails.email}}"
+            },
+            {
+              "name": "shareUrl",
+              "value": "={{$json.body.shareUrl}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "972c46dc-5076-47ab-87a7-1e7926eeba3d",
+      "name": "Prepare Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        896,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "person",
+        "name": "={{ $json.name }}",
+        "additionalFields": {
+          "customProperties": {
+            "property": [
+              {
+                "name": "e2f3dfeb9af85d6293c73d1db6ec4b49f31d7ef3",
+                "value": "={{ $json.shareUrl }}"
+              }
+            ]
+          },
+          "email": [
+            "={{ $json.email }}"
+          ],
+          "phone": [
+            "={{ $('Webhook').item.json.body.userDetails.phone }}"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.pipedrive",
+      "typeVersion": 1,
+      "position": [
+        1104,
+        512
+      ],
+      "id": "e3d1bb23-bb52-4d4a-bf0e-609dd6498e03",
+      "name": "Create a person",
+      "credentials": {
+        "pipedriveApi": {
+          "id": "aIx8Ns0WDz7e6AT3",
+          "name": "Ambitiebar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "lead",
+        "title": "=Loontransparantie: {{ $json.name }}",
+        "associateWith": "person",
+        "person_id": "={{ $json.id }}",
+        "additionalFields": {
+          "label_ids": [
+            "52419380-07f4-11f1-bc6f-ad611214a851"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.pipedrive",
+      "typeVersion": 1,
+      "position": [
+        1328,
+        512
+      ],
+      "id": "7a0ae35c-48a8-4d06-a002-22091c200b5d",
+      "name": "Create a lead",
+      "credentials": {
+        "pipedriveApi": {
+          "id": "aIx8Ns0WDz7e6AT3",
+          "name": "Ambitiebar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "lori@deambitiebar.nl",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Download: Je Talent Scan Resultaten",
+        "html": "Hi {{ $json.name }},<br><br>Bedankt voor het invullen van de Talent Scan! Je resultaten staan voor je klaar.<br><br><a href=\"{{ $json.shareUrl }}\">Bekijk hier je volledige rapport</a><br><br>Groet,<br>Lori & Demi",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1536,
+        512
+      ],
+      "id": "ddb201a2-af98-4f92-b6e6-3d9e7b9b4317",
+      "name": "Send Initial Email",
+      "credentials": {
+        "smtp": {
+          "id": "qB41C7FEczvPuRpg",
+          "name": "lori@deambitiebar.nl"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 2,
+        "unit": "days"
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Wait 2 Days",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        1728,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "lori@deambitiebar.nl",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Je rapport is klaar 👋",
+        "html": "=Hi {{ $json.name }},<br><br>Zo, je rapport staat klaar. Jouw score: {{ $json.score }}/100.<br><br>We zien een paar dingen terugkomen bij bedrijven die worstelen met het vinden van ervaren professionals. Vaak ligt de focus enorm op salaris, terwijl ervaren professionals daar eigenlijk al niet meer zo mee bezig zijn - zij kijken veel meer naar welke impact ze kunnen maken en hoe ze kunnen doorgroeien.<br><br>En dat doorgroeien dan… dat blijft vaak nog best vaag. Terwijl ze juist heel concreet willen weten: waar sta ik over 2 jaar? Wat ga ik leren? Welke verantwoordelijkheden krijg ik erbij?<br><br>Oh, en die lange wervingsprocessen… die kosten je echt kandidaten. De goede kandidaten zijn binnen 4 weken van de markt, dus als jij 6 weken nodig hebt om tot een gesprek te komen, ben je te laat.<br><br>In je rapport zie je wat er bij jullie speelt en wat je nu al kunt doen. Heb je er vragen over of wil je gewoon even sparren hoe je dit aanpakt? We denken graag met je mee!<br><br>Groetjes,<br>Lori & Demi<br>De Ambitie Bar",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1920,
+        512
+      ],
+      "id": "b2c3d4e5-f6a7-890b-cdef-0123456789ab",
+      "name": "Email Day 2",
+      "credentials": {
+        "smtp": {
+          "id": "qB41C7FEczvPuRpg",
+          "name": "lori@deambitiebar.nl"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 3,
+        "unit": "days"
+      },
+      "id": "c3d4e5f6-a7b8-90cd-ef01-23456789abcd",
+      "name": "Wait 3 More Days",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        2112,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "lori@deambitiebar.nl",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Wat ervaren kandidaten écht zoeken (en het is niet salaris)",
+        "html": "=Hi {{ $json.name }},<br><br>Een vraag: wat denk je dat de belangrijkste reden is waarom een medior of senior professional voor een nieuwe werkgever kiest?<br><br>We vroegen dit aan 300+ professionals. Hun antwoorden:<br><ul><li>Impact - \"Kan ik hier écht het verschil maken?\"</li><li>Autonomie - \"Mag ik zelf beslissingen nemen?\"</li><li>Leidinggevende - \"Kan ik van deze persoon leren?\"</li><li>Cultuur - \"Passen deze mensen bij mij?\"</li><li>Salaris - Pas op plek 5, maar moet wel marktconform zijn of een stap vooruit betekenen</li></ul><br>Herken je dit? De meeste vacatures focussen op punt 5, terwijl de eerste vier vaak de doorslag geven.<br><br>Groetjes,<br>Lori & Demi<br>De Ambitie Bar",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        2304,
+        512
+      ],
+      "id": "d4e5f6a7-b8c9-0def-0123-456789abcdef",
+      "name": "Email Day 5",
+      "credentials": {
+        "smtp": {
+          "id": "qB41C7FEczvPuRpg",
+          "name": "lori@deambitiebar.nl"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 5,
+        "unit": "days"
+      },
+      "id": "e5f6a7b8-c9d0-1e2f-3a4b-567890abcdef",
+      "name": "Wait 5 More Days",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        2496,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "lori@deambitiebar.nl",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Zullen we jullie vacature eens onder de loep nemen?",
+        "html": "=Hi {{ $json.name }},<br><br>Een tijdje geleden vulde je onze scan in. Ik ben benieuwd: zijn jullie al verder gekomen met het aantrekken van medior/senior talent?<br><br>Als je wilt, nemen we jullie huidige vacature graag onder de loep. We analyseren dan:<br><ul><li>Hoe jullie vacature scoort t.o.v. de markt</li><li>Wat jullie doelgroep zoekt</li><li>Waar de quick wins zitten</li></ul><br>Vrijblijvend en kosteloos - gewoon even meedenken.<br><br>Interesse? <a href=\"https://deambitiebar.nl/contact/\">Plan hier je gratis marktscan in</a><br><br>Groet,<br>Lori & Demi<br>De Ambitie Bar",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        2688,
+        512
+      ],
+      "id": "f6a7b8c9-d0e1-2f3a-4b5c-67890abcdef1",
+      "name": "Email Day 10",
+      "credentials": {
+        "smtp": {
+          "id": "qB41C7FEczvPuRpg",
+          "name": "lori@deambitiebar.nl"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Prepare Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Data": {
+      "main": [
+        [
+          {
+            "node": "Create a person",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a person": {
+      "main": [
+        [
+          {
+            "node": "Create a lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a lead": {
+      "main": [
+        [
+          {
+            "node": "Send Initial Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Initial Email": {
+      "main": [
+        [
+          {
+            "node": "Wait 2 Days",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 2 Days": {
+      "main": [
+        [
+          {
+            "node": "Email Day 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Day 2": {
+      "main": [
+        [
+          {
+            "node": "Wait 3 More Days",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 3 More Days": {
+      "main": [
+        [
+          {
+            "node": "Email Day 5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Day 5": {
+      "main": [
+        [
+          {
+            "node": "Wait 5 More Days",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 5 More Days": {
+      "main": [
+        [
+          {
+            "node": "Email Day 10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "7ed82a4c-b69a-4696-b7aa-350be8abef9b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a8153022011ebb99e69152930a54f801e3f1b4c4c25549d95313da2e85a2a6dc"
+  },
+  "id": "3iD14sxVes48Uq32",
+  "tags": []
+}

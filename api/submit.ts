@@ -35,7 +35,7 @@ export default async function handler(req: any, res: any) {
         const filename = blobUrl.pathname.split('/').pop()?.replace('.json', '') || '';
         const shareId = `${storeId}~${filename}`;
         // Use request host for share URL, fallback to known domain
-        const host = req.headers.host || 'deambitiebar.nl';
+        const host = req.headers.host || 'talentscan.deambitiebar.nl';
         const protocol = req.headers['x-forwarded-proto'] || 'https';
         const shareUrl = `${protocol}://${host}/?id=${shareId}`;
 

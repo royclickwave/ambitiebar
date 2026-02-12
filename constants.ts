@@ -17,77 +17,85 @@ export const IMAGES = {
 export const QUESTIONS: Question[] = [
   {
     id: 1,
-    text: "Hoe is jullie huidige verhouding tussen juniors, medioren en senioren?",
+    text: "In welke vakgebieden zoeken jullie medior/senior professionals?",
+    subText: "Selecteer het vakgebied dat momenteel de hoogste prioriteit heeft.",
     options: [
-      { id: 'a', text: "Veel juniors, weinig senioren (piramide)", points: 5 },
-      { id: 'b', text: "Gezonde mix van alle niveaus", points: 15 },
-      { id: 'c', text: "Veel senioren, weinig aanwas van onderaf", points: 10 },
-      { id: 'd', text: "We hebben hier geen duidelijk beeld van", points: 0 },
+      { id: 'a', text: "Sales", points: 10 },
+      { id: 'b', text: "Marketing", points: 10 },
+      { id: 'c', text: "HR", points: 10 },
+      { id: 'd', text: "Recruitment", points: 10 },
+      { id: 'e', text: "Administratie", points: 10 },
+      { id: 'f', text: "Anders", points: 10 },
     ]
   },
   {
     id: 2,
-    text: "Hoe lang duurt het gemiddeld om een medior/senior vacature in te vullen?",
+    text: "Hoeveel medior/senior vacatures hebben jullie het afgelopen jaar ingevuld?",
     options: [
-      { id: 'a', text: "Binnen 1 maand", points: 15 },
-      { id: 'b', text: "1 tot 3 maanden", points: 10 },
-      { id: 'c', text: "Langer dan 3 maanden", points: 5 },
-      { id: 'd', text: "Sommige vacatures staan al 'eeuwig' open", points: 0 },
+      { id: 'a', text: "0 - 2", points: 5 },
+      { id: 'b', text: "3 - 5", points: 10 },
+      { id: 'c', text: "6 - 10", points: 15 },
+      { id: 'd', text: "Meer dan 10", points: 15 },
     ]
   },
   {
     id: 3,
-    text: "Worden medior/senior professionals proactief benaderd (headhunting)?",
+    text: "Hoe lang staat een medior/senior vacature gemiddeld open?",
     options: [
-      { id: 'a', text: "Ja, we doen dit zelf of met een vaste partner", points: 15 },
-      { id: 'b', text: "Soms, bij zeer lastige functies", points: 7 },
-      { id: 'c', text: "Nee, we wachten op reacties op vacatures", points: 0 },
+      { id: 'a', text: "Minder dan 4 weken", points: 15 },
+      { id: 'b', text: "4 - 8 weken", points: 10 },
+      { id: 'c', text: "8 - 12 weken", points: 5 },
+      { id: 'd', text: "Langer dan 12 weken", points: 0 },
     ]
   },
   {
     id: 4,
-    text: "Is er een duidelijk loopbaanpad voor professionals om door te groeien?",
+    text: "Wat is de grootste uitdaging bij het werven van ervaren talent?",
     options: [
-      { id: 'a', text: "Ja, volledig uitgewerkt met criteria", points: 15 },
-      { id: 'b', text: "Het wordt besproken, maar ligt niet vast", points: 7 },
-      { id: 'c', text: "Nee, groei gaat organisch/op gevoel", points: 0 },
-    ]
+      { id: 'a', text: "Te weinig reacties", points: 5 },
+      { id: 'b', text: "Wel reacties, maar niet de juiste kandidaten", points: 5 },
+      { id: 'c', text: "Kandidaten kiezen voor de concurrent", points: 0 },
+      { id: 'd', text: "Te duur / buiten budget", points: 5 },
+      { id: 'e', text: "Anders", points: 5 },
+    ],
+    tip: "Tip: Als kandidaten voor de concurrent kiezen, ligt het vaak aan jullie EVP (Employee Value Proposition)."
   },
   {
     id: 5,
-    text: "Maakt jullie organisatie gebruik van een specifiek referral programma?",
+    text: "Bieden jullie medior/senior professionals een duidelijk doorgroeiperspectief?",
     options: [
-      { id: 'a', text: "Ja, en dit levert regelmatig nieuwe mensen op", points: 10 },
-      { id: 'b', text: "Ja, maar het wordt nauwelijks gebruikt", points: 5 },
-      { id: 'c', text: "Nee, we hebben geen programma", points: 0 },
+      { id: 'a', text: "Ja, we hebben een helder groeipad", points: 15 },
+      { id: 'b', text: "Enigszins, maar niet concreet", points: 7 },
+      { id: 'c', text: "Nee, niet echt", points: 0 },
     ]
   },
   {
     id: 6,
-    text: "Hoeveel procent van de aangenomen senioren werkt er na 1 jaar nog?",
+    text: "Hoe onderscheidt jullie aanbod zich voor ervaren professionals t.o.v. concurrenten?",
     options: [
-      { id: 'a', text: "Meer dan 90%", points: 15 },
-      { id: 'b', text: "70% - 90%", points: 10 },
-      { id: 'c', text: "Minder dan 70%", points: 0 },
+      { id: 'a', text: "We zijn duidelijk onderscheidend (en kunnen dit benoemen)", points: 15 },
+      { id: 'b', text: "Enigszins, maar niet heel scherp", points: 7 },
+      { id: 'c', text: "We weten het eerlijk gezegd niet", points: 0 },
+      { id: 'd', text: "Niet, we lijken op andere werkgevers", points: 0 },
     ]
   },
   {
     id: 7,
-    text: "Is de 'employer brand' specifiek gericht op ervaren professionals?",
+    text: "Werven jullie zelf of schakelen jullie een bureau in?",
     options: [
-      { id: 'a', text: "Ja, onze uitstraling matcht hun behoeften", points: 10 },
-      { id: 'b', text: "Nee, we richten ons vooral op starters/algemeen", points: 0 },
-      { id: 'c', text: "We hebben geen actieve employer branding", points: 0 },
+      { id: 'a', text: "Alleen zelf", points: 10 },
+      { id: 'b', text: "Soms een bureau", points: 10 },
+      { id: 'c', text: "Meestal via een bureau", points: 5 },
     ]
   },
   {
     id: 8,
-    text: "Worden salarisindicaties direct gedeeld in de eerste fase?",
+    text: "Hoe snel kunnen jullie een aanbod doen aan een geschikte kandidaat?",
     options: [
-      { id: 'a', text: "Ja, in de vacaturetekst", points: 5 },
-      { id: 'b', text: "In het eerste telefoongesprek", points: 5 },
-      { id: 'c', text: "Pas bij het eerste/tweede gesprek", points: 0 },
-      { id: 'd', text: "Tijdens de contractfase", points: 0 },
+      { id: 'a', text: "Binnen 1 week", points: 15 },
+      { id: 'b', text: "1 - 2 weken", points: 10 },
+      { id: 'c', text: "2 - 4 weken", points: 5 },
+      { id: 'd', text: "Langer dan 4 weken", points: 0 },
     ]
   }
 ];
