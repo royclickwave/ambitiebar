@@ -89,10 +89,11 @@ export const EmailCapture: React.FC<EmailCaptureProps> = ({ onSubmit }) => {
               </Button>
             </form>
 
-            <div className="mt-8 flex items-center justify-center gap-3 opacity-80">
-              <p className="text-xs text-gray-400 text-center italic max-w-sm font-title">
-                "De beste kandidaten kiezen niet voor het hoogste salaris. Ze kiezen voor het bedrijf dat het beste verhaal vertelt."
+            <div className="mt-10 pt-8 border-t border-gray-100 text-center">
+              <p className="text-sm text-gray-400 italic font-title leading-relaxed">
+                "Ervaren professionals zoeken niet alleen een baan. Ze zoeken een plek waar ze impact kunnen maken en hun ambitie kwijt kunnen."
               </p>
+              <p className="text-xs text-primary-yellow font-bold uppercase tracking-widest mt-2">– Lori, De Ambitie Bar</p>
             </div>
           </div>
         </div>

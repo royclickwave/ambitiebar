@@ -145,14 +145,14 @@ export const Results: React.FC<ResultsProps> = ({ answers, userDetails, isFirstV
     return (
         <Layout>
             {/* Header Result */}
-            <div className="bg-black text-white py-16 md:py-24 border-b-8 border-primary-yellow">
+            <div className="bg-cream text-black py-12 md:py-20 border-b-8 border-primary-yellow">
                 <div className="max-w-4xl mx-auto px-4">
-                    <p className="opacity-70 mb-3 uppercase tracking-widest text-xs font-bold font-title italic">Analyse voor {userDetails.company}</p>
+                    <p className="text-primary-yellow mb-3 uppercase tracking-widest text-xs font-black font-title italic">Analyse voor {userDetails.company}</p>
                     <h1 className="text-4xl md:text-6xl font-bold font-title mb-8 leading-tight italic">
                         Hi {userDetails.name}, <br />
                         <span className="text-primary-yellow">hier is je Talent-Factor.</span>
                     </h1>
-                    <p className="text-xl opacity-90 leading-relaxed max-w-2xl font-medium italic">
+                    <p className="text-xl text-gray-700 leading-relaxed max-w-2xl font-medium italic">
                         {content.intro}
                     </p>
                 </div>
@@ -160,13 +160,13 @@ export const Results: React.FC<ResultsProps> = ({ answers, userDetails, isFirstV
 
             <div className="max-w-4xl mx-auto px-4 -mt-12 relative z-10 pb-20">
                 {/* Score Card */}
-                <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-neutral-gray flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-12">
+                <div className="bg-white rounded-[2.5rem] shadow-2xl p-8 md:p-14 border border-neutral-gray flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-12">
                     <div className="relative w-48 h-48 flex-shrink-0">
                         <svg className="w-full h-full" viewBox="0 0 160 160">
                             <circle cx="80" cy="80" r="72" stroke="#f3f4f6" strokeWidth="14" fill="none" />
                             <circle
                                 cx="80" cy="80" r="72"
-                                stroke={score < 40 ? '#e2b808' : score <= 70 ? '#e2b808' : '#e2b808'}
+                                stroke="#e2b808"
                                 strokeWidth="14"
                                 fill="none"
                                 strokeDasharray="452 452"
@@ -225,11 +225,6 @@ export const Results: React.FC<ResultsProps> = ({ answers, userDetails, isFirstV
                             </div>
                         ))}
                     </div>
-                    <div className="mt-6 text-center">
-                        <p className="text-black font-bold font-title text-lg italic uppercase tracking-widest">
-                            "Ambitie is de brandstof, actie is de motor."
-                        </p>
-                    </div>
                 </div>
 
                 {!isFirstView && (
@@ -245,15 +240,15 @@ export const Results: React.FC<ResultsProps> = ({ answers, userDetails, isFirstV
                                 { title: "Retentie & Groei", data: content.compliance }
                             ].map((section, idx) => (
                                 <div key={idx} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-neutral-gray">
-                                    <div className="bg-neutral-lightGray px-8 py-6 border-b border-neutral-gray flex items-center justify-between">
+                                    <div className="bg-cream px-8 py-6 border-b border-neutral-gray flex items-center justify-between font-bold">
                                         <h3 className="text-xl font-bold font-title text-black uppercase tracking-wide italic">{section.title}</h3>
                                         <CheckCircle className="text-primary-yellow" />
                                     </div>
                                     <div className="p-8 space-y-8">
                                         <div>
                                             <p className="text-lg font-bold text-black mb-4 font-title italic">{section.data.text}</p>
-                                            <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
-                                                <p className="text-xs font-bold text-gray-400 uppercase mb-2 tracking-widest">De impact:</p>
+                                            <div className="bg-cream/40 rounded-xl p-5 border border-neutral-gray/50">
+                                                <p className="text-xs font-bold text-gray-500 uppercase mb-2 tracking-widest">De impact:</p>
                                                 <p className="text-gray-700 leading-relaxed italic font-sans">{section.data.why}</p>
                                             </div>
                                         </div>
@@ -267,9 +262,9 @@ export const Results: React.FC<ResultsProps> = ({ answers, userDetails, isFirstV
                         </div>
 
                         {/* Hiring Tips Advice Section - Customized for De Ambitiebar */}
-                        <div className="mt-20 bg-black text-white rounded-3xl shadow-xl p-10 md:p-14 border-b-8 border-primary-yellow">
+                        <div className="mt-20 bg-cream text-black rounded-[2.5rem] shadow-xl p-10 md:p-14 border-b-8 border-primary-yellow border-2 border-neutral-gray">
                             <h2 className="text-3xl font-bold font-title mb-4 italic uppercase tracking-tighter">De markt voor talent verandert. Verander jij mee?</h2>
-                            <p className="text-lg opacity-80 mb-10 leading-relaxed font-sans italic">
+                            <p className="text-lg text-gray-700 mb-10 leading-relaxed font-sans italic">
                                 Een medior of senior kandidaat zoekt geen 'baan', die zoekt de volgende stap in hun ambitie. Hoe presenteer jij die?
                             </p>
 
@@ -295,11 +290,11 @@ export const Results: React.FC<ResultsProps> = ({ answers, userDetails, isFirstV
                                     }
                                 ].map((tip) => (
                                     <div key={tip.num} className="space-y-4">
-                                        <div className="text-4xl font-bold text-primary-yellow font-title italic">0{tip.num}</div>
+                                        <div className="text-4xl font-black text-primary-yellow font-title italic">0{tip.num}</div>
                                         <h4 className="text-xl font-bold font-title italic uppercase tracking-tight">{tip.title}</h4>
-                                        <p className="text-gray-400 text-sm leading-relaxed font-sans">{tip.text}</p>
+                                        <p className="text-gray-600 text-sm leading-relaxed font-sans">{tip.text}</p>
                                         <div className="pt-2">
-                                            <span className="text-xs font-bold text-primary-yellow border-b border-primary-yellow uppercase tracking-widest">{tip.stats}</span>
+                                            <span className="text-xs font-bold text-primary-yellow border-b-2 border-primary-yellow uppercase tracking-widest">{tip.stats}</span>
                                         </div>
                                     </div>
                                 ))}
@@ -323,7 +318,7 @@ export const Results: React.FC<ResultsProps> = ({ answers, userDetails, isFirstV
                                                     {step.date}
                                                 </div>
                                                 <h4 className="text-xl font-bold font-title text-black mb-2 italic">{step.title}</h4>
-                                                <p className="text-gray-500 text-sm leading-relaxed max-w-sm mx-auto md:ml-auto md:mr-0 font-sans">{step.desc}</p>
+                                                <p className="text-gray-600 text-sm leading-relaxed max-w-sm mx-auto md:ml-auto md:mr-0 font-sans">{step.desc}</p>
                                             </div>
                                             <div className={`relative z-10 w-8 h-8 rounded-full border-4 border-white shadow-md ${step.color}`}></div>
                                             <div className="hidden md:block flex-1"></div>

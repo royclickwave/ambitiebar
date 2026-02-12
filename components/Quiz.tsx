@@ -63,38 +63,38 @@ export const Quiz: React.FC<QuizProps> = ({ onComplete }) => {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="bg-white rounded-2xl shadow-sm border border-neutral-gray p-6 md:p-10"
+                        className="bg-white rounded-[2.5rem] shadow-xl border border-neutral-gray p-8 md:p-14"
                     >
-                        <h2 className="text-2xl md:text-3xl font-bold font-title text-black mb-4 italic">
+                        <h2 className="text-2xl md:text-4xl font-bold font-title text-black mb-8 italic uppercase tracking-tighter">
                             {question.text}
                         </h2>
                         {question.subText && (
-                            <p className="text-gray-500 mb-6 italic">{question.subText}</p>
+                            <p className="text-gray-500 mb-8 italic text-lg">{question.subText}</p>
                         )}
 
-                        <div className="space-y-3">
+                        <div className="space-y-4">
                             {question.options.map((option) => (
                                 <button
                                     key={option.id}
                                     onClick={() => handleOptionSelect(option)}
-                                    className={`w-full text-left p-4 md:p-5 rounded-xl border-2 transition-all duration-200 flex items-center justify-between group
+                                    className={`w-full text-left p-6 md:p-8 rounded-2xl border-2 transition-all duration-300 flex items-center justify-between group
                                 ${answers[question.id]?.id === option.id
-                                            ? 'border-primary-yellow bg-primary-yellow/5'
-                                            : 'border-neutral-gray hover:border-primary-yellow hover:bg-primary-yellow/5'
+                                            ? 'border-primary-yellow bg-primary-yellow/10 shadow-lg'
+                                            : 'border-neutral-gray bg-white hover:border-primary-yellow hover:bg-primary-yellow/5'
                                         }
                             `}
                                 >
-                                    <span className={`font-medium text-lg ${answers[question.id]?.id === option.id ? 'text-black font-bold italic' : 'text-neutral-darkGray'}`}>
+                                    <span className={`font-medium text-xl ${answers[question.id]?.id === option.id ? 'text-black font-extrabold italic' : 'text-neutral-darkGray'}`}>
                                         {option.text}
                                     </span>
-                                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center
+                                    <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-colors
                                 ${answers[question.id]?.id === option.id
-                                            ? 'border-black bg-black'
-                                            : 'border-gray-300 group-hover:border-black'
+                                            ? 'border-primary-yellow bg-primary-yellow'
+                                            : 'border-gray-300 group-hover:border-primary-yellow'
                                         }`
                                     }>
                                         {answers[question.id]?.id === option.id && (
-                                            <div className="w-2.5 h-2.5 rounded-full bg-white" />
+                                            <div className="w-3 h-3 rounded-full bg-white shadow-sm" />
                                         )}
                                     </div>
                                 </button>
